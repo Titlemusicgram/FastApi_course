@@ -1,13 +1,8 @@
 import datetime
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import TIMESTAMP, String, Boolean, ForeignKey
-
-
-class Base(DeclarativeBase):
-    type_annotation_map = {
-        datetime.datetime: TIMESTAMP(timezone=True)
-    }
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, Boolean, ForeignKey
+from src.database import Base
 
 
 class Role(Base):

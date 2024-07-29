@@ -1,5 +1,5 @@
 from fastapi_users.authentication import CookieTransport
-from config import SECRET_KEY_JWT
+from src.config import SECRET_KEY_JWT
 from fastapi_users.authentication import AuthenticationBackend, JWTStrategy
 
 
