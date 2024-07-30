@@ -1,4 +1,7 @@
+import time
+
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi_cache.decorator import cache
 from sqlalchemy import select, insert
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.database import get_async_session
@@ -35,3 +38,10 @@ async def add_specific_operations(new_operation: OperationCreate, session: Async
     await session.execute(stmt)
     await session.commit()
     return {'status': 'success'}
+
+
+@router.get("/cache")
+@cache(expire=30)
+async def index():
+    time.sleep(2)
+    return dict(hello="world")
