@@ -10,6 +10,8 @@ DB_PASS = os.environ.get("DB_PASS")
 DB_NAME = os.environ.get("DB_NAME")
 SECRET_KEY_JWT = os.environ.get("SECRET_KEY_JWT")
 SECRET_KEY_MANAGER = os.environ.get("SECRET_KEY_MANAGER")
+SMTP_USER=os.environ.get("SMTP_USER")
+SMTP_PASSWORD=os.environ.get("SMTP_PASSWORD")
 
 
 def get_url():

@@ -3,10 +3,12 @@ from contextlib import asynccontextmanager
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from src.operations.router import router as router_operation
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from fastapi_users import FastAPIUsers
 from src.auth.auth import auth_backend
 from src.auth.models import User
+from src.auth.router import router as auth_router
+from src.tasks.router import router as tasks_router
 from src.auth.manager import get_user_manager
 from src.auth.schemas import UserRead, UserCreate
 from redis import asyncio as aioredis
@@ -39,15 +41,5 @@ app.include_router(
 )
 
 app.include_router(router_operation)
-
-current_user = fastapi_users.current_user()
-
-
-@app.get("/protected-route")
-def protected_route(user: User = Depends(current_user)):
-    return f"Hello, {user.username}"
-
-
-@app.get("/unprotected-route")
-def unprotected_route():
-    return f"Hello, Anonym"
+app.include_router(auth_router)
+app.include_router(tasks_router)
